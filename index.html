@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Reddit Clone</title>
+
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+  </head>
+  <body>
+
+    <div ng-controller="redditController">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+
+          <div class="navbar-header">
+            <h3>Reddit Clone</h3>
+          </div>
+
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+
+
+              <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                  <input type="text" ng-model="search" class="form-control" placeholder="Search">
+                </div>
+              </form>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort By Votes <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li ng-repeat="entry in entries | orderBy: '-votes'"><a href="#">Votes</a></li>
+                  <li ng-repeat="entry in entries | orderBy: '-date'"><a href="#">Date</a></li>
+                  <li ng-repeat="entry in entries | orderBy: '-title'"><a href="#">Title</a></li>
+                </ul>
+              </li>
+            </ul>
+            <h5 aria-hidden="true" ng-click="form = true" class="glyphicon glyphicon-plus"><a href="#">Submit Post</a>
+            </h5>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+
+      <form ng-model="form" ng-show="form">
+        <div class="form-group">
+          <label>Title</label>
+          <input ng-model="title" type="text" class="form-control" id="title" placeholder="Title">
+        </div>
+        <div class="form-group">
+          <label>Author</label>
+          <input ng-model="author" type="text" class="form-control" id="author2" placeholder="Author">
+        </div>
+        <div class="form-group">
+          <label>Image URL</label>
+          <input ng-model="image" type="text" class="form-control" id="image" placeholder="Image URL">
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <input ng-model="description" type="text" class="form-control" id="description" placeholder="Description">
+        </div>
+          <button ng-click="addEntry()" ng-hide="form" type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      <!-- <div class="container"> -->
+        <div ng-repeat="entry in entries | filter:search">
+        <br><br>
+          <div class="row">
+            <div class="col-sm-3">
+              <span><img ng-src="{{entry.image}}"></span>
+            </div>
+
+            <div id="title" class="col-sm-9">
+                <h3>{{entry.title}} |
+                <span ng-click="totalVotes = totalVotes + 1" class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+                <span ng-click="totalVotes = totalVotes - 1" class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+                <span ng-class="{green: totalVotes > 0, red: totalVotes < 0}" > {{totalVotes}}</span></h3>
+            </div>
+          <!-- </div> --> <!-- close row -->
+            <!-- <div class="row"> -->
+              <div class="col-sm-6">
+              </div>
+
+              <div id="author" class="col-sm-2">
+                <h5>By: {{entry.author}}</h5>
+              </div>
+            <!-- </div> --><!--  close row -->
+            <!-- <div class="row"> -->
+              <div class="col-sm-3">
+              </div>
+
+              <div id="description" class="col-sm-9">
+                <p>{{entry.description}}</p>
+              </div>
+
+              <div class="col-sm-9">
+                <span class="glyphicon glyphicon-calendar"></span><time title="{{ post.date | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}"> {{ entry.date | amCalendar }} | </time><span class="glyphicon glyphicon-comment"> comments | </span><span class="glyphicon glyphicon-pencil" ng-click="form2 = true">Add Comment</span>
+              </div>
+
+              <br>
+              <form class="form-inline" ng-model="form2" ng-show="form2">
+                <div class="form-group">
+                  <label for="author">Author</label>
+                  <input type="text" class="form-control" id="author-comment" placeholder="username">
+                </div>
+                <div class="form-group">
+                  <label for="text">Text</label>
+                  <input type="text" class="form-control" id="text-comment" placeholder="comment text">
+                </div>
+                <button type="submit" class="btn btn-default">Add Comment</button>
+              </form>
+
+            </div>
+          </div> <!-- close row -->
+        </div> <!-- close ng-repeat -->
+      </div> <!-- close container -->
+    </div> <!-- close controller -->
+
+
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="js/main.js"></script>
+
+    <!-- load momentJS (required for angular-moment) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+
+    <!-- load angular-moment -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.9.0/angular-moment.min.js"></script>
+
+  </body>
+</html>

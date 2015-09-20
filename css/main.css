@@ -1,0 +1,39 @@
+img {
+  width: 350px;
+  height: 250px;
+  padding: 20px;
+}
+
+.row {
+  background-color: #E7E7E7;
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
+}
+
+p {
+  font-size: 15px;
+}
+
+#author {
+  text-align: right;
+}
+
+h5 {
+  font-size: 17px;
+}
+
+form {
+  margin-left: 300px;
+  margin-right: 300px;
+  margin-bottom: 30px;
+}
+
+#break {
+  background-color: white;
+}

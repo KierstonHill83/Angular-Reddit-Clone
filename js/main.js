@@ -3,17 +3,35 @@ var app = angular.module('myApp', ['angularMoment']);
 
 app.controller('redditController', ['$scope', function($scope) {
 
-  $scope.totalVotes = 0;
-
   var castlewoodCanyon = {
     'title': 'Castlewood Canyon, CO',
     'author': 'Kierston',
     'image': 'http://www.runningguru.com/Images/1996/castlewood%20ridge.jpg',
-    'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
     'date': Date.now()
   };
 
-  $scope.entries = [castlewoodCanyon];
+  var redwood = {
+    'title': 'Redwood National Park, CA',
+    'author': 'Kierston',
+    'image': 'http://www.adventurerents.com/images/ca11180.jpg',
+    'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+    'date': Date.now()
+  };
+
+  var yosemite = {
+    'title': 'Yosemite National Park, CA',
+    'author': 'Kierston',
+    'image': 'http://www.yosemitepark.com/Images/home-img-01.jpg',
+    'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+    'date': Date.now()
+  };
+
+  $scope.entries = [castlewoodCanyon, redwood, yosemite];
+  $scope.totalVotes = 0;
+  $scope.comments = [];
+  $scope.showForm2 = false;
+
 
   $scope.addEntry = function() {
     var entry = {
@@ -26,16 +44,28 @@ app.controller('redditController', ['$scope', function($scope) {
     $scope.entries.push(entry);
   };
 
+
   $scope.upvote = function() {
     totalVotes++;
   };
 
-  // upvote();
 
   $scope.downvote = function() {
     totalVotes--;
   };
 
-  // downvote();
+
+  $scope.addComment = function() {
+    var comment = {
+      'text': $scope.textComment,
+      'author': $scope.authorComment
+    };
+    $scope.comments.push(comment);
+    console.log($scope.comments);
+  };
+
+  $scope.showCommentForm = function() {
+    $scope.showForm2 = true;
+  };
 
 }]);

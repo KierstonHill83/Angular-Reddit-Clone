@@ -16,6 +16,10 @@ img {
   color: red;
 }
 
+#title, #description, #footer {
+  margin-left: 50px;
+}
+
 p {
   font-size: 15px;
 }
@@ -37,3 +41,4 @@ form {
 #break {
   background-color: white;
 }
+

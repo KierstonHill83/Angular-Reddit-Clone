@@ -54,21 +54,22 @@
       <form ng-model="form" ng-show="form">
         <div class="form-group">
           <label>Title</label>
-          <input ng-model="title" type="text" class="form-control" id="title" placeholder="Title">
+          <input ng-model="title" type="text" class="form-control" placeholder="Title">
         </div>
         <div class="form-group">
           <label>Author</label>
-          <input ng-model="author" type="text" class="form-control" id="author2" placeholder="Author">
+          <input ng-model="author" type="text" class="form-control" placeholder="Author">
         </div>
         <div class="form-group">
           <label>Image URL</label>
-          <input ng-model="image" type="text" class="form-control" id="image" placeholder="Image URL">
+          <input ng-model="image" type="text" class="form-control" placeholder="Image URL">
         </div>
         <div class="form-group">
           <label>Description</label>
-          <input ng-model="description" type="text" class="form-control" id="description" placeholder="Description">
+          <input ng-model="description" type="text" class="form-control" placeholder="Description">
         </div>
-          <button ng-click="addEntry(); form = false" ng-hide="form" type="submit" class="btn btn-primary">Submit</button>
+        <br>
+          <button ng-click="addEntry(); form = false" type="submit" class="btn btn-primary">Submit</button>
       </form>
 
         <div ng-repeat="entry in entries | filter:search">
@@ -95,19 +96,21 @@
               <div class="col-sm-3">
               </div>
 
-              <div id="description" class="col-sm-6">
+              <div id="description" class="col-sm-7">
                 <p>{{entry.description}}</p>
               </div>
 
               <div id="footer" class="col-sm-6">
-                <span class="glyphicon glyphicon-calendar"></span><time title="{{ post.date | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}"> {{ entry.date | amCalendar }} </time>
-                <button class="btn btn-warning"><span class="glyphicon glyphicon-comment"></span> comments </button>
-                <button class="btn btn-info" ng-click="showCommentForm()"><span class="glyphicon glyphicon-pencil"></span> Add Comment</button>
+                <span class="glyphicon glyphicon-calendar"></span><time title="{{ post.date | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}"> {{ entry.date | amCalendar }} | </time>
+                <span class="glyphicon glyphicon-comment"> comments | </span>
+                <span class="glyphicon glyphicon-pencil" ng-click="showCommentForm()"> Add Comment</span>
+                <!-- <button class="btn btn-default"><span class="glyphicon glyphicon-comment"></span> comments </button>
+                <button class="btn btn-default" ng-click="showCommentForm()"><span class="glyphicon glyphicon-pencil"></span> Add Comment</button> -->
               </div>
 
               <div class="container">
                 <div class="row">
-                  <div class="col-md-12">
+                  <div class="col-sm-12">
                     <form class="form-inline" ng-model="form2" ng-show="showForm2">
                       <div class="form-group">
                         <label for="commentAuthor">Author</label>
@@ -117,7 +120,7 @@
                         <label for="commentText">Text</label>
                         <input ng-model="textComment" type="text" class="form-control" id="text-comment" placeholder="comment text">
                       </div>
-                      <button type="button" class="btn btn-success" ng-click="addComment()">Add Comment</button>
+                      <button type="button" class="btn btn-success" ng-click="addComment(); showForm2 = false">Add Comment</button>
                     </form>
                   </div>
                 </div>

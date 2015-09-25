@@ -10,7 +10,10 @@ app.controller('redditController', ['$scope', function($scope) {
     'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
     'date': Date.now(),
     'votes': 0,
-    'comment': {}
+    'comments': [{
+      'author': 'Terence',
+      'text': "This place is great!" 
+    }]
   };
 
   var redwood = {
@@ -20,7 +23,7 @@ app.controller('redditController', ['$scope', function($scope) {
     'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
     'date': Date.now(),
     'votes': 0,
-    'comment': {}
+    'comments': []
   };
 
   var yosemite = {
@@ -30,7 +33,7 @@ app.controller('redditController', ['$scope', function($scope) {
     'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
     'date': Date.now(),
     'votes': 0,
-    'comment': {}
+    'comments': []
   };
 
   $scope.entries = [castlewoodCanyon, redwood, yosemite];
@@ -45,7 +48,7 @@ app.controller('redditController', ['$scope', function($scope) {
       'description': $scope.description,
       'date': Date.now(),
       'votes': 0,
-      'comment': {}
+      'comments': []
     };
     $scope.entries.push(entry);
   };
@@ -62,14 +65,14 @@ app.controller('redditController', ['$scope', function($scope) {
 
 
   $scope.addComment = function() {
-    var comment = {
-      'text': $scope.textComment,
-      'author': $scope.authorComment
-    };
+    this.entry.comments.push({
+      'text': this.textComment,
+      'author': this.authorComment
+    });
   };
 
-  $scope.showCommentForm = function() {
-    $scope.showForm2 = true;
-  };
+  // $scope.showCommentForm = function() {
+  //   $scope.showForm2 = true;
+  // };
 
 }]);

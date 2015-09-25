@@ -104,16 +104,14 @@
 
               <div id="footer" class="col-sm-6">
                 <span class="glyphicon glyphicon-calendar"></span><time title="{{ post.date | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}"> {{ entry.date | amCalendar }} | </time>
-                <span class="glyphicon glyphicon-comment" ng-click="commentForm = true"> comments | </span>
-                <span class="glyphicon glyphicon-pencil" ng-click="showCommentForm()"> Add Comment</span>
-                <!-- <button class="btn btn-default"><span class="glyphicon glyphicon-comment"></span> comments </button>
-                <button class="btn btn-default" ng-click="showCommentForm()"><span class="glyphicon glyphicon-pencil"></span> Add Comment</button> -->
+                <span class="glyphicon glyphicon-comment" ng-click="showComment = true"> {{entry.comments.length}} comments | </span>
+                <span class="glyphicon glyphicon-pencil" ng-click="form2 = true"> Add Comment</span>
               </div>
 
               <div class="container">
                 <div class="row">
                   <div class="col-sm-12">
-                    <form class="form-inline" ng-model="form2" ng-show="showForm2">
+                    <form class="form-inline" ng-model="form2" ng-show="form2">
                       <div class="form-group">
                         <label for="commentAuthor">Author</label>
                         <input ng-model="authorComment" type="text" class="form-control" id="author-comment" placeholder="username">
@@ -122,16 +120,16 @@
                         <label for="commentText">Text</label>
                         <input ng-model="textComment" type="text" class="form-control" id="text-comment" placeholder="comment text">
                       </div>
-                      <button type="button" class="btn btn-success" ng-click="addComment(); showForm2 = false">Add Comment</button>
+                      <button type="button" class="btn btn-success" ng-click="addComment(); form2 = false">Add Comment</button>
                     </form>
                   </div>
                 </div>
               </div>
 
-              <div class="container" id="comments">
+              <div class="container" id="comments" ng-model="showComment" ng-show="showComment" ng-repeat="comment in entry.comments">
                 <div class="row">
-                  <div class="col-sm-12">
-                    <div ng-model="commentForm" ng-show="commentForm = true">
+                  <div class="col-sm-12 col-sm-offset-3">
+                    <div>
                       <p><strong>{{comment.author}}</strong>-- {{comment.text}}</p>
                     </div>
                   </div>

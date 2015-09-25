@@ -46,3 +46,6 @@ form {
   margin-right: 285px;
 }
 
+#comments {
+  display: none;
+}

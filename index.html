@@ -29,11 +29,11 @@
                   </div>
                 </form>
 
-                <select ng-model="dropdown">
-                  <option value="">Sort By Votes</option>
-                  <option ng-repeat="entry in entries | orderBy: '-votes'">Votes</option>
-                  <option ng-repeat="entry in entries | orderBy: '-date'">Date</option>
-                  <option ng-repeat="entry in entries | orderBy: '-title'">Title</option>
+                <select ng-model="entrySort">
+                  <option value="">Sort By:</option>
+                  <option value="votes">Votes</option>
+                  <option value="date">Date</option>
+                  <option value="-title">Title</option>
                 </select>
 
                <!--  <li class="dropdown">
@@ -72,7 +72,9 @@
           <button ng-click="addEntry(); form = false" type="submit" class="btn btn-primary">Submit</button>
       </form>
 
-        <div ng-repeat="entry in entries | filter:search">
+      <!-- reverse? -->
+
+        <div ng-repeat="entry in entries | orderBy:entrySort:true | filter:search">
         <br><br>
           <div class="row">
             <div class="col-sm-3">
@@ -81,9 +83,9 @@
 
             <div id="title" class="col-sm-6">
                 <h3>{{entry.title}} |
-                <span ng-click="totalVotes = totalVotes + 1" class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
-                <span ng-click="totalVotes = totalVotes - 1" class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
-                <span ng-class="{green: totalVotes > 0, red: totalVotes < 0}" > {{totalVotes}}</span></h3>
+                <span ng-click="upvote()" class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+                <span ng-click="downvote()" class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+                <span ng-class="{green: entry.votes > 0, red: entry.votes < 0}" > {{entry.votes}}</span></h3>
             </div>
          
               <div class="col-sm-6">
@@ -102,7 +104,7 @@
 
               <div id="footer" class="col-sm-6">
                 <span class="glyphicon glyphicon-calendar"></span><time title="{{ post.date | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}"> {{ entry.date | amCalendar }} | </time>
-                <span class="glyphicon glyphicon-comment"> comments | </span>
+                <span class="glyphicon glyphicon-comment" ng-click="commentForm = true"> comments | </span>
                 <span class="glyphicon glyphicon-pencil" ng-click="showCommentForm()"> Add Comment</span>
                 <!-- <button class="btn btn-default"><span class="glyphicon glyphicon-comment"></span> comments </button>
                 <button class="btn btn-default" ng-click="showCommentForm()"><span class="glyphicon glyphicon-pencil"></span> Add Comment</button> -->
@@ -122,6 +124,16 @@
                       </div>
                       <button type="button" class="btn btn-success" ng-click="addComment(); showForm2 = false">Add Comment</button>
                     </form>
+                  </div>
+                </div>
+              </div>
+
+              <div class="container" id="comments">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div ng-model="commentForm" ng-show="commentForm = true">
+                      <p><strong>{{comment.author}}</strong>-- {{comment.text}}</p>
+                    </div>
                   </div>
                 </div>
               </div>

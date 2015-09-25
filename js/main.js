@@ -8,7 +8,9 @@ app.controller('redditController', ['$scope', function($scope) {
     'author': 'Kierston',
     'image': 'http://www.runningguru.com/Images/1996/castlewood%20ridge.jpg',
     'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-    'date': Date.now()
+    'date': Date.now(),
+    'votes': 0,
+    'comment': {}
   };
 
   var redwood = {
@@ -16,7 +18,9 @@ app.controller('redditController', ['$scope', function($scope) {
     'author': 'Kierston',
     'image': 'http://www.adventurerents.com/images/ca11180.jpg',
     'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-    'date': Date.now()
+    'date': Date.now(),
+    'votes': 0,
+    'comment': {}
   };
 
   var yosemite = {
@@ -24,12 +28,12 @@ app.controller('redditController', ['$scope', function($scope) {
     'author': 'Kierston',
     'image': 'http://www.yosemitepark.com/Images/home-img-01.jpg',
     'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-    'date': Date.now()
+    'date': Date.now(),
+    'votes': 0,
+    'comment': {}
   };
 
   $scope.entries = [castlewoodCanyon, redwood, yosemite];
-  $scope.totalVotes = 0;
-  $scope.comments = [];
   $scope.showForm2 = false;
 
 
@@ -39,19 +43,21 @@ app.controller('redditController', ['$scope', function($scope) {
       'author': $scope.author,
       'image': $scope.image,
       'description': $scope.description,
-      'date': Date.now()
+      'date': Date.now(),
+      'votes': 0,
+      'comment': {}
     };
     $scope.entries.push(entry);
   };
 
 
   $scope.upvote = function() {
-    totalVotes++;
+    this.entry.votes++;
   };
 
 
   $scope.downvote = function() {
-    totalVotes--;
+    this.entry.votes--;
   };
 
 
@@ -60,8 +66,6 @@ app.controller('redditController', ['$scope', function($scope) {
       'text': $scope.textComment,
       'author': $scope.authorComment
     };
-    $scope.comments.push(comment);
-    console.log($scope.comments);
   };
 
   $scope.showCommentForm = function() {
